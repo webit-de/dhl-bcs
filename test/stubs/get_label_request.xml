@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bcs="http://dhl.de/webservices/businesscustomershipping" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cis="http://dhl.de/webservice/cisbase">
+  <env:Header>
+    <cis:Authentification>
+      <cis:user>2222222222_01</cis:user>
+      <cis:signature>pass</cis:signature>
+      <cis:type>0</cis:type>
+    </cis:Authentification>
+  </env:Header>
+  <env:Body>
+    <bcs:GetLabelRequest>
+      <bcs:Version>
+        <majorRelease>2</majorRelease>
+        <minorRelease>0</minorRelease>
+      </bcs:Version>
+      <cis:shipmentNumber>22222222901010000951</cis:shipmentNumber>
+    </bcs:GetLabelRequest>
+  </env:Body>
+</env:Envelope>

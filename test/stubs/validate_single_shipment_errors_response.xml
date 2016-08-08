@@ -1,0 +1,26 @@
+<soap:Envelope xmlns:bcs="http://dhl.de/webservices/businesscustomershipping" xmlns:cis="http://dhl.de/webservice/cisbase" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+  <soap:Body>
+    <bcs:ValidateShipmentResponse>
+      <bcs:Version>
+        <majorRelease xmlns="">2</majorRelease>
+        <minorRelease xmlns="">0</minorRelease>
+      </bcs:Version>
+      <Status xmlns="">
+        <statusCode>0</statusCode>
+        <statusText>Weak validation error occured.</statusText>
+        <statusMessage>Der eingegebene Wert ist zu lang und wurde gekürzt.</statusMessage>
+      </Status>
+      <ValidationState xmlns="">
+        <sequenceNumber>01</sequenceNumber>
+        <Status>
+          <statusCode>0</statusCode>
+          <statusText>Weak validation error occured.</statusText>
+          <statusMessage>Der eingegebene Wert ist zu lang und wurde gekürzt.</statusMessage>
+          <statusMessage>Die Postleitzahl konnte nicht gefunden werden.</statusMessage>
+          <statusMessage>Der eingegebene Wert ist zu lang und wurde gekürzt.</statusMessage>
+        </Status>
+      </ValidationState>
+    </bcs:ValidateShipmentResponse>
+  </soap:Body>
+</soap:Envelope>

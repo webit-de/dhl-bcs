@@ -1,0 +1,28 @@
+<soap:Envelope xmlns:bcs="http://dhl.de/webservices/businesscustomershipping" xmlns:cis="http://dhl.de/webservice/cisbase" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+  <soap:Body>
+    <bcs:CreateShipmentOrderResponse>
+      <bcs:Version>
+        <majorRelease xmlns="">2</majorRelease>
+        <minorRelease xmlns="">0</minorRelease>
+      </bcs:Version>
+      <Status xmlns="">
+        <statusCode>0</statusCode>
+        <statusText>ok</statusText>
+        <statusMessage>Der Webservice wurde ohne Fehler ausgeführt.</statusMessage>
+      </Status>
+      <CreationState xmlns="">
+        <sequenceNumber>01</sequenceNumber>
+        <LabelData>
+          <Status>
+            <statusCode>0</statusCode>
+            <statusText>ok</statusText>
+            <statusMessage>Der Webservice wurde ohne Fehler ausgeführt.</statusMessage>
+          </Status>
+          <cis:shipmentNumber>22222222901010000944</cis:shipmentNumber>
+          <labelUrl>https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDzoWAizFLNP5lQPVuv28JYw%3D%3D</labelUrl>
+        </LabelData>
+      </CreationState>
+    </bcs:CreateShipmentOrderResponse>
+  </soap:Body>
+</soap:Envelope>

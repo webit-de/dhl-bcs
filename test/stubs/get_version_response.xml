@@ -1,0 +1,12 @@
+<soap:Envelope xmlns:bus="http://dhl.de/webservices/businesscustomershipping" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"/>
+  <soap:Body>
+    <bus:GetVersionResponse>
+      <bus:Version>
+        <majorRelease xmlns="">2</majorRelease>
+        <minorRelease xmlns="">0</minorRelease>
+        <build xmlns="">18</build>
+      </bus:Version>
+    </bus:GetVersionResponse>
+  </soap:Body>
+</soap:Envelope>

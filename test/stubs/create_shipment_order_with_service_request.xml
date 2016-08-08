@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bcs="http://dhl.de/webservices/businesscustomershipping" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cis="http://dhl.de/webservice/cisbase">
+  <env:Header>
+    <cis:Authentification>
+      <cis:user>2222222222_01</cis:user>
+      <cis:signature>pass</cis:signature>
+      <cis:type>0</cis:type>
+    </cis:Authentification>
+  </env:Header>
+  <env:Body>
+    <bcs:CreateShipmentOrderRequest>
+      <bcs:Version>
+        <majorRelease>2</majorRelease>
+        <minorRelease>0</minorRelease>
+      </bcs:Version>
+      <ShipmentOrder>
+        <sequenceNumber>01</sequenceNumber>
+        <Shipment>
+          <ShipmentDetails>
+            <product>V01PAK</product>
+            <shipmentDate>2016-07-13</shipmentDate>
+            <cis:accountNumber>22222222220101</cis:accountNumber>
+            <ShipmentItem>
+              <weightInKG>3.5</weightInKG>
+            </ShipmentItem>
+            <Service>
+              <IndividualSenderRequirement active="1" details="Test"/>
+            </Service>
+          </ShipmentDetails>
+          <Shipper>
+            <Name>
+              <cis:name1>Christoph Wagner</cis:name1>
+              <cis:name2>webit!</cis:name2>
+            </Name>
+            <Address>
+              <cis:streetName>Schandauer Straße</cis:streetName>
+              <cis:streetNumber>34</cis:streetNumber>
+              <cis:zip>01309</cis:zip>
+              <cis:city>Dresden</cis:city>
+              <cis:Origin>
+                <cis:countryISOCode>DE</cis:countryISOCode>
+              </cis:Origin>
+            </Address>
+            <Communication>
+              <cis:email>wagner@webit.de</cis:email>
+            </Communication>
+          </Shipper>
+          <Receiver>
+            <cis:name1>Jane Doe</cis:name1>
+            <Communication>
+              <cis:email>jane.doe@example.com</cis:email>
+            </Communication>
+            <Address>
+              <cis:streetName>Willy-Brandt-Straße</cis:streetName>
+              <cis:streetNumber>1</cis:streetNumber>
+              <cis:zip>10557</cis:zip>
+              <cis:city>Berlin</cis:city>
+              <cis:Origin>
+                <cis:countryISOCode>DE</cis:countryISOCode>
+              </cis:Origin>
+            </Address>
+          </Receiver>
+        </Shipment>
+        <LabelResponseType>URL</LabelResponseType>
+      </ShipmentOrder>
+    </bcs:CreateShipmentOrderRequest>
+  </env:Body>
+</env:Envelope>
