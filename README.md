@@ -38,7 +38,7 @@ config = {
   user: 'your BCS user name', #mandatory
   signature: 'Your BCS user password', #mandatory
   ekp: 'Your DHL EKP (first part of your DHL Account number)', #mandatory
-  participation_number: 'Your DHL EKP (last two characters of your DHL Account number)' #mandatory
+  participation_number: 'Your DHL participation_number (last two characters of your DHL Account number)' #mandatory
 }
 ```
 
@@ -50,6 +50,25 @@ options = {
  log: false # If log is set, you get all logging (with request and response XML) to your standard logger. (defaults to true)
 }
 ```
+
+### Where do I get all these numbers?
+If you are confused about all the number and credential stuff here is a short explanation.
+
+DHL uses a customer integration gateway (cig) for its services.
+You have to register your app first at the developer portal of dhl, define an app_id and get a token for that.
+`api_user` is your app_id and `api_pwd` is the token you get.
+This is basically needed to communicate with the DHL services.
+
+To identify as a BCS user you have to give your credentials of the BCS website as `user` and `signature`.
+
+The billing works with a number (Abrechnungsnummer) with 14 chars that consists of three parts.
+The first 10 digits are your EKP (Einheitliche Kunden- und Produktnummer) that you get from your DHL contract.
+
+The next 2 digits are product dependent (Verfahren), so you don't have to specify it, because they are known if you specify a product at the shipment.
+
+The last 2 chars, the participation_number (Teilnahme-Nummer) can be digits or uppercase characters.
+This is contract dependent and used to specify billing conditions.
+
 
 ### Create shipments
 
