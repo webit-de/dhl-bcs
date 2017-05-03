@@ -43,18 +43,18 @@ module Dhl::Bcs::V2
     end
 
     def product=(product)
-      raise Error, "No valid product code #{product}. Please use one of these: #{PRODUCTS.join(', ')}" unless PRODUCTS.include?(product)
+      raise Dhl::Bcs::Error, "No valid product code #{product}. Please use one of these: #{PRODUCTS.join(', ')}" unless PRODUCTS.include?(product)
       @product = product
     end
 
     def to_soap_hash(ekp, participation_number)
-      raise Error, 'Packing weight in kilo must be set!' unless weight
-      raise Error, 'Sender address must be set!' unless shipper
-      raise Error, 'Receiver address must be set!' unless receiver
-      raise Error, 'Product must be set!' unless product
+      raise Dhl::Bcs::Error, 'Packing weight in kilo must be set!' unless weight
+      raise Dhl::Bcs::Error, 'Sender address must be set!' unless shipper
+      raise Dhl::Bcs::Error, 'Receiver address must be set!' unless receiver
+      raise Dhl::Bcs::Error, 'Product must be set!' unless product
 
       account_number = "#{ekp}#{PRODUCT_PROCEDURE_NUMBERS[product]}#{participation_number}"
-      raise Error, 'Need a 14 character long account number. Check EKP and participation_number' if account_number.size != 14
+      raise Dhl::Bcs::Error, 'Need a 14 character long account number. Check EKP and participation_number' if account_number.size != 14
       {
         'ShipmentDetails' => {}.tap { |h|
           h['product'] = product

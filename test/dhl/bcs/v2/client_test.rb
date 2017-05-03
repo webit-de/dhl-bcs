@@ -81,6 +81,36 @@ module Dhl::Bcs::V2
       end
     end
 
+    def test_create_shipment_without_weight
+      shipment = Dhl::Bcs.build_shipment(
+        shipper: {
+          name: 'Christoph Wagner',
+          company: 'webit! Gesellschaft für neue Medien mbH',
+          street_name: 'Schandauer Straße',
+          street_number: '34',
+          zip: '01309',
+          city: 'Dresden',
+          country_code: 'DE',
+          email: 'wagner@webit.de'
+        },
+        receiver: {
+          name: 'John Doe',
+          street_name: 'Mainstreet',
+          street_number: '10',
+          address_addition: 'Appartment 2a',
+          zip: '90210',
+          city: 'Springfield',
+          country_code: 'DE',
+          email: 'john.doe@example.com'
+        },
+        shipment_date: Date.new(2016, 7, 13)
+      )
+
+      assert_raises Dhl::Bcs::Error do
+        result = @client.validate_shipment(shipment)
+      end
+    end
+
     def test_create_shipment_order_request
       #WebMock.allow_net_connect!
       stub_and_check(file_prefix: 'create_shipment_order') do
