@@ -19,7 +19,7 @@ module Dhl::Bcs::V2
       @participation_number = config[:participation_number]
 
       @logIO = StringIO.new
-      @logger = Logger.new($stdout) if log
+      @logger = log && Logger.new($stdout)
 
       @client = Savon.client({
         endpoint: (test ? 'https://cig.dhl.de/services/sandbox/soap' : 'https://cig.dhl.de/services/production/soap'),

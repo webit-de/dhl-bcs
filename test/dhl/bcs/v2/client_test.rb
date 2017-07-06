@@ -107,7 +107,7 @@ module Dhl::Bcs::V2
       )
 
       assert_raises Dhl::Bcs::Error do
-        result = @client.validate_shipment(shipment)
+        @client.validate_shipment(shipment)
       end
     end
 

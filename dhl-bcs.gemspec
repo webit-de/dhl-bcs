@@ -21,9 +21,9 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency "savon", "~> 2.11"
 
-  spec.add_development_dependency "bundler", "~> 1.12"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "minitest", "~> 5.0"
-  spec.add_development_dependency "webmock", "~> 2.1"
+  spec.add_development_dependency "bundler", "~> 1.15"
+  spec.add_development_dependency "rake", "~> 12.0"
+  spec.add_development_dependency "minitest", "~> 5.10"
+  spec.add_development_dependency "webmock", "~> 3.0"
   spec.add_development_dependency "pry-byebug", "~> 3.4"
 end
