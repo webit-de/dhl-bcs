@@ -13,6 +13,7 @@ require 'dhl/bcs/v2/parcel_shop'
 require 'dhl/bcs/v2/postfiliale'
 require 'dhl/bcs/v2/bank_data'
 require 'dhl/bcs/v2/service'
+require 'dhl/bcs/v2/locator'
 
 module Dhl
   module Bcs
