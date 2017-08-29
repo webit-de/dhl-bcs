@@ -8,16 +8,7 @@ module Dhl::Bcs::V2
 
     def self.build(name: nil, **attributes)
       communication = Communication.build(attributes)
-      location =
-        if attributes.key?(:packstation_number)
-          Packstation
-        elsif attributes.key?(:postfilial_number)
-          Postfiliale
-        elsif attributes.key?(:parcel_shop_number)
-          ParcelShop
-        else
-          Address
-        end.build(attributes)
+      location = Locator.for(attributes)
       new(attributes.merge(name: name, communication: communication, location: location))
     end
 
