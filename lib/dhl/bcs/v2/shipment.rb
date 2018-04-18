@@ -3,7 +3,7 @@ module Dhl::Bcs::V2
 
     attr_accessor :shipper, :receiver, :bank_data, :shipment_date,
                   :customer_reference, :services, :weight, :length, :height, :width,
-                  :notification_email
+                  :notification_email, :export_document
     attr_reader :product
 
     PRODUCT_PROCEDURE_NUMBERS = {
@@ -22,11 +22,12 @@ module Dhl::Bcs::V2
     PRODUCTS = PRODUCT_PROCEDURE_NUMBERS.keys.freeze
 
     # build a shipment from hash data
-    def self.build(shipper:, receiver:, bank_data: nil, **shipment_attributes)
+    def self.build(shipper:, receiver:, bank_data: nil, export_document: nil, **shipment_attributes)
       shipper = Shipper.build(shipper) if shipper.is_a?(Hash)
       receiver = Receiver.build(receiver) if receiver.is_a?(Hash)
       bank_data = BankData.build(bank_data) if bank_data.is_a?(Hash)
-      new({ shipper: shipper, receiver: receiver, bank_data: bank_data }.merge(shipment_attributes))
+      export_document = ExportDocument.build(export_document.delete(:export_doc_positions),export_document) if export_document.is_a?(Hash)
+      new({ shipper: shipper, receiver: receiver, bank_data: bank_data, export_document: export_document }.merge(shipment_attributes))
     end
 
     def initialize(attributes = {})
@@ -56,6 +57,7 @@ module Dhl::Bcs::V2
       raise Dhl::Bcs::Error, 'Sender address must be set!' unless shipper
       raise Dhl::Bcs::Error, 'Receiver address must be set!' unless receiver
       raise Dhl::Bcs::Error, 'Product must be set!' unless product
+      raise Dhl::Bcs::Error, 'In order to do an international shipment --product:V53WPAK--, :export_document muse be set!' unless !((product == 'V53WPAK') ^ export_document  )
 
       account_number = "#{ekp}#{PRODUCT_PROCEDURE_NUMBERS[product]}#{participation_number}"
       raise Dhl::Bcs::Error, 'Need a 14 character long account number. Check EKP and participation_number' if account_number.size != 14
@@ -80,6 +82,9 @@ module Dhl::Bcs::V2
         'Shipper' => shipper.to_soap_hash,
         # Receiver information
         'Receiver' => receiver.to_soap_hash
+      }.tap{|h|
+          #ExportDocuemnt information
+        h['ExportDocument'] = export_document.to_soap_hash if export_document
       }
     end
 

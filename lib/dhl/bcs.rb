@@ -14,6 +14,7 @@ require 'dhl/bcs/v2/postfiliale'
 require 'dhl/bcs/v2/bank_data'
 require 'dhl/bcs/v2/service'
 require 'dhl/bcs/v2/locator'
+require 'dhl/bcs/v2/export_document'
 
 module Dhl
   module Bcs

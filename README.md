@@ -148,6 +148,59 @@ shipment3 = Dhl::Bcs.build_shipment(shipper: shipper, receiver: receiver, weight
 
 client.create_shipment_order(shipment1, shipment2, shipment3)
 ```
+### International Shipments
+
+In order to send parcels outside of the EU, one should provide information about the content of the shipment.   
+Dhl offers cn23 document, which is data for the Customs as this kind of shipment is considered Export of goods.
+As an output one gets, in addition to the label, a url for the document in an A4-format ready to be printed.
+
+The way to implement that is identical of shipper's and receiver's ones.
+
+```ruby
+export_document = {
+  invoice_number = 'ABCDEF...',
+  export_type = 'Document',  #  could be one of these ['RETURN_OF_GOODS','PRESENT','COMMERCIAL_SAMPLE','DOCUMENT','OTHER']
+  export_type_description = 'some desc', # should be set if `export_type` was set to 'OTHER'
+  terms_of_trade = 'DDP', # could be one of these ['DDP','DXV','DDU','DDX']
+  place_of_commital= 'Bern',
+  permit_number = 1232135,
+  attestation_number = 1234345,
+  with_electronic_export_notification = true, # true|false
+  export_doc_positions: [
+    {
+      description: 'content1',
+      country_code_origing: 'CN',
+      customs_tariff_number: '1234567',
+      ammount: 1,
+      net_weight_in_kg: 0.2,
+      customs_value: 25.00
+    },
+    {
+      description: 'content2',
+      country_code_origing: 'DE',
+      customs_tariff_number: '00222011',
+      ammount: 1,
+      net_weight_in_kg: 1.2,
+      customs_value: 112.00
+    }
+  ]
+}
+
+shipment = Dhl::Bcs.build_shipment(export_document: export_document, shipper: shipper, receiver: receiver)
+```
+
+and then one gets a result like this:
+
+```ruby
+[
+  {
+    status: { status_code: '0', status_text: 'ok', status_message: 'Der Webservice wurde ohne Fehler ausgeführt.' },
+    shipment_number: '22222222201019582121',
+    label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDsSX32%2BEB5exp8nNPs%2FhJSQ%3D%3D',
+    export_label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=Vfov%2BMinVhMH6nQVfvSCmNUSRNnaQNHKPaiLiWtXsqm%2BENCM6wnStB2C44rl6BEmSxbrPeaTQwBhoHBr802FnuftGVJ9uVM0C0ztLpxNfyc%3D',
+  }
+]
+```
 
 ### Validate shipments
 

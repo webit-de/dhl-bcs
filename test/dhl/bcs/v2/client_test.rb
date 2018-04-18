@@ -158,16 +158,32 @@ module Dhl::Bcs::V2
       end
     end
 
+    def test_create_shipment_order_international_packet_request
+      # WebMock.allow_net_connect!
+      stub_and_check(file_prefix: 'create_shipment_order_international_packet') do
+        result = @client.create_shipment_order(valid_shipment_international_packet)
+        assert_equal(
+          [
+            {
+              status: { status_code: '0', status_text: 'ok', status_message: 'Der Webservice wurde ohne Fehler ausgeführt.' },
+              shipment_number: '22222222201019582121',
+              label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDsSX32%2BEB5exp8nNPs%2FhJSQ%3D%3D',
+              export_label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=Vfov%2BMinVhMH6nQVfvSCmNUSRNnaQNHKPaiLiWtXsqm%2BENCM6wnStB2C44rl6BEmSxbrPeaTQwBhoHBr802FnuftGVJ9uVM0C0ztLpxNfyc%3D',
+            }
+          ], result)
+      end
+    end
+
     def test_update_shipment_order
       stub_and_check(file_prefix: 'update_shipment_order') do
         shipment = valid_shipment
         shipment.shipper.name = 'Hans Peter'
         result = @client.update_shipment_order('22222222901010000944', shipment)
         assert_equal({
-            status: { status_code: '0', status_text: 'ok', status_message: 'Der Webservice wurde ohne Fehler ausgeführt.' },
-            shipment_number: '22222222901010000951',
-            label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDt2F0qWfCk1O81BAd1GiAgw%3D%3D'
-          }, result)
+          status: { status_code: '0', status_text: 'ok', status_message: 'Der Webservice wurde ohne Fehler ausgeführt.' },
+          shipment_number: '22222222901010000951',
+          label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDt2F0qWfCk1O81BAd1GiAgw%3D%3D'
+        }, result)
       end
     end
 
@@ -230,6 +246,61 @@ module Dhl::Bcs::V2
         },
         weight: 3.5,
         shipment_date: Date.new(2016, 7, 13)
+      )
+    end
+
+    def valid_shipment_international_packet
+      Dhl::Bcs.build_shipment(
+        shipper: {
+          name: 'Christoph Wagner',
+          company: 'webit!',
+          street_name: 'Schandauer Straße',
+          street_number: '34',
+          zip: '01309',
+          city: 'Dresden',
+          country_code: 'DE',
+          email: 'wagner@webit.de'
+        },
+        receiver: {
+          name: 'Jane Doe',
+          street_name: 'Bleicherweg',
+          street_number: '5',
+          zip: '8001',
+          city: 'Zürich',
+          country_code: 'CH',
+          email: 'jane.doe@example.com'
+        },
+        weight: 3.5,
+        product: 'V53WPAK',
+        shipment_date: Date.new(2018, 4, 18),
+        export_document: {
+          invoice_number: 12345678,
+          export_type: 'OTHER',
+          export_type_description: 'Permanent',
+          terms_of_trade: 'DDP',
+          place_of_commital: 'Bonn',
+          permit_number: 1234,
+          attestation_number: 12345678,
+          with_electronic_export_notification: true,
+          export_doc_positions: [
+            {
+              description: 'ExportPositionOne',
+              country_code_origin: 'CN',
+              customs_tariff_number: 12345678,
+              amount: 1,
+              net_weight_in_kg: 0.2,
+              customs_value: 24.96
+            },
+            {
+              description: 'ExportPositionTwo',
+              country_code_origin: 'CN',
+              customs_tariff_number: 12345678,
+              amount: 1,
+              net_weight_in_kg: 0.4,
+              customs_value: 99.90
+            }
+          ]
+        }
       )
     end
 
