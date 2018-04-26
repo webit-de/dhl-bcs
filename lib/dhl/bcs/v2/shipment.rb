@@ -1,9 +1,10 @@
 module Dhl::Bcs::V2
   class Shipment
 
-    attr_accessor :shipper, :receiver, :bank_data, :shipment_date, :product,
+    attr_accessor :shipper, :receiver, :bank_data, :shipment_date,
                   :customer_reference, :services, :weight, :length, :height, :width,
                   :notification_email
+    attr_reader :product
 
     PRODUCT_PROCEDURE_NUMBERS = {
       'V01PAK' => '01', # DHL Paket
