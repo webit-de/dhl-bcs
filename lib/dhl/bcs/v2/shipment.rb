@@ -6,11 +6,14 @@ module Dhl::Bcs::V2
                   :notification_email
 
     PRODUCT_PROCEDURE_NUMBERS = {
-      'V01PAK' => '01', # Paket National
-      'V53WPAK' => '53', # Weltpaket
-      'V54EPAK' => '54', # Europaket
-      'V06TG' => '01', # Kurier Taggleich
-      'V06WZ' => '01', # Kurier Wunschzeit
+      'V01PAK' => '01', # DHL Paket
+      'V01PRIO' => '01', # DHL Paket Prio
+      'V06PAK' => '06', # DHL Paket Taggleich
+      'V53WPAK' => '53', # DHL Paket International
+      'V54EPAK' => '54', # DHL Europaket
+      'V55PAK' => '55', # DHL Paket Connect
+      'V06TG' => '01', # DHL Kurier Taggleich
+      'V06WZ' => '01', # DHL Kurier Wunschzeit
       'V86PARCEL' => '86', # DHL Paket Austria
       'V87PARCEL' => '87', # DHL PAKET Connect
       'V82PARCEL' => '82' # DHL PAKET International
