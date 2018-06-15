@@ -102,16 +102,18 @@ module Dhl::Bcs::V2
 
     protected
 
-    def build_shipment_orders(shipments, label_response_type: 'URL')
+    def build_shipment_orders(shipments, label_response_type: 'URL', print_only_if_codeable: false)
       raise Dhl::Bcs::DataError, 'No more than 30 shipments allowed per request!' if shipments.size > 30
       {
         'ShipmentOrder' =>
           shipments.map.with_index(1) do |shipment, index|
-            {
+            h = {
               'sequenceNumber' => format('%02i', index.to_s),
               'Shipment' => shipment.to_soap_hash(@ekp, @participation_number),
-              'LabelResponseType' => label_response_type.to_s.upcase
+              'LabelResponseType' => label_response_type.to_s.upcase,
             }
+            h['PrintOnlyIfCodeable/'] = {'@active': 1} if print_only_if_codeable
+            h
           end
       }
     end
