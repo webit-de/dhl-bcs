@@ -111,6 +111,67 @@ module Dhl::Bcs::V2
       end
     end
 
+    def test_create_shipment_codeable_error
+      # WebMock.allow_net_connect!
+      invalid_shipment = Dhl::Bcs.build_shipment(
+        shipper: {
+          name: 'Christoph Wagner',
+          company: 'webit! Gesellschaft für neue Medien mbH',
+          street_name: 'Schandauer Straße',
+          street_number: '34',
+          zip: '01309',
+          city: 'Dresden',
+          country_code: 'DE',
+          email: 'wagner@webit.de'
+        },
+        receiver: {
+          name: 'John Doe',
+          street_name: 'Mainstreet',
+          street_number: '10',
+          address_addition: 'Appartment 2a',
+          zip: '90210',
+          city: 'Springfield',
+          country_code: 'DE',
+          email: 'john.doe@example.com'
+        },
+        weight: 3.5,
+        shipment_date: Date.new(2016, 7, 13)
+      )
+
+      stub_and_check(file_prefix: 'create_shipment_codeable_error') do
+        result = @client.create_shipment_order(invalid_shipment, print_only_if_codeable: true)
+        assert_equal(
+            [
+              {
+                :status=> {
+                  status_code: '1101',
+                  status_text: 'Hard validation error occured.',
+                  status_message: [
+                    'In der Sendung trat mindestens ein harter Fehler auf.',
+                    'Die Postleitzahl konnte nicht gefunden werden.',
+                    'Der eingegebene Wert ist zu lang und wurde gekürzt.'
+                  ]
+                }
+              }
+            ], result)
+      end
+    end
+
+    def test_create_shipment_print_only_if_codeable
+      # WebMock.allow_net_connect!
+      stub_and_check(file_prefix: 'create_shipment_print_only_if_codeable') do
+        result = @client.create_shipment_order(valid_shipment, print_only_if_codeable: true)
+        assert_equal(
+          [
+            {
+              status: { status_code: '0', status_text: 'ok', status_message: 'Der Webservice wurde ohne Fehler ausgeführt.' },
+              shipment_number: '22222222201019582121',
+              label_url: 'https://cig.dhl.de/gkvlabel/SANDBOX/dhl-vls/gw/shpmntws/printShipment?token=JD7HKktuvugIFEkhSvCfbEz4J8Ah0dkcVuw4PzBGRyRnW%2FwEPAwfytLtb31e7gMDsSX32%2BEB5exp8nNPs%2FhJSQ%3D%3D',
+            }
+          ], result)
+      end
+    end
+
     def test_create_shipment_order_request
       #WebMock.allow_net_connect!
       stub_and_check(file_prefix: 'create_shipment_order') do
