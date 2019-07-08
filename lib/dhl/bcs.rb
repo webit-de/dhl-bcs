@@ -1,42 +1,40 @@
-require 'dhl/bcs/version'
-require 'dhl/bcs/errors'
-require 'dhl/bcs/v2/client'
-require 'dhl/bcs/v2/buildable'
-require 'dhl/bcs/v2/shipment'
-require 'dhl/bcs/v2/shipper'
-require 'dhl/bcs/v2/receiver'
-require 'dhl/bcs/v2/communication'
-require 'dhl/bcs/v2/location'
-require 'dhl/bcs/v2/address'
-require 'dhl/bcs/v2/packstation'
-require 'dhl/bcs/v2/parcel_shop'
-require 'dhl/bcs/v2/postfiliale'
-require 'dhl/bcs/v2/bank_data'
-require 'dhl/bcs/v2/service'
-require 'dhl/bcs/v2/locator'
-require 'dhl/bcs/v2/export_document'
+require 'dhl/bcs/v3/client'
+require 'dhl/bcs/v3/buildable'
+require 'dhl/bcs/v3/shipment'
+require 'dhl/bcs/v3/shipper'
+require 'dhl/bcs/v3/receiver'
+require 'dhl/bcs/v3/communication'
+require 'dhl/bcs/v3/location'
+require 'dhl/bcs/v3/address'
+require 'dhl/bcs/v3/packstation'
+require 'dhl/bcs/v3/parcel_shop'
+require 'dhl/bcs/v3/postfiliale'
+require 'dhl/bcs/v3/bank_data'
+require 'dhl/bcs/v3/service'
+require 'dhl/bcs/v3/locator'
+require 'dhl/bcs/v3/export_document'
 
 module Dhl
   module Bcs
 
     def self.client(config, options = {})
-      V2::Client.new(config, options)
+      V3::Client.new(config, options)
     end
 
     def self.build_shipment(*args)
-      V2::Shipment.build(*args)
+      V3::Shipment.build(*args)
     end
 
     def self.build_shipper(*args)
-      V2::Shipper.build(*args)
+      V3::Shipper.build(*args)
     end
 
     def self.build_receiver(*args)
-      V2::Receiver.build(*args)
+      V3::Receiver.build(*args)
     end
 
     def self.build_service(*args)
-      V2::Service.new(*args)
+      V3::Service.new(*args)
     end
 
   end

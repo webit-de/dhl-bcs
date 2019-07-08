@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class ShipperTest < Minitest::Test
 
     def test_build_shipper

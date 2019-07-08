@@ -2,10 +2,10 @@ require 'savon'
 require 'stringio'
 require 'logger'
 
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Client
 
-    WSDL = 'https://cig.dhl.de/cig-wsdls/com/dpdhl/wsdl/geschaeftskundenversand-api/2.0/geschaeftskundenversand-api-2.0.wsdl'
+    WSDL = 'https://cig.dhl.de/cig-wsdls/com/dpdhl/wsdl/geschaeftskundenversand-api/3.0/geschaeftskundenversand-api-3.0.wsdl'
 
     def initialize(config, log: true, test: false, **options)
       raise "User must be specified" if config[:user].nil?
@@ -38,7 +38,7 @@ module Dhl::Bcs::V2
       })
     end
 
-    def get_version(major: 2, minor: 0, build: nil)
+    def get_version(major: 3, minor: 0, build: nil)
       request(:get_version,
         'bcs:Version' => {
           'majorRelease' => major,
@@ -122,7 +122,7 @@ module Dhl::Bcs::V2
       @logIO.string = ''
       response = @client.call(action, message: {
         'bcs:Version' => {
-          'majorRelease' => 2,
+          'majorRelease' => 3,
           'minorRelease' => 0
         }
       }.merge(message))

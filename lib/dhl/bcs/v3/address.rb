@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Address < Location
 
     ADD_PROPS = %i(company company_addition street_name street_number address_addition dispatching_information).freeze

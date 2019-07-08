@@ -1,6 +1,6 @@
 require 'test_helper'
 
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class ExportDocumentTest < Minitest::Test
 
     def test_build_export_document

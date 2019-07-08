@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Shipper
 
     PROPERTIES = %i(name company company_addition address communication).freeze
