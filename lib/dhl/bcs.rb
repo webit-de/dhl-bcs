@@ -1,3 +1,5 @@
+require 'dhl/bcs/version'
+require 'dhl/bcs/errors'
 require 'dhl/bcs/v3/client'
 require 'dhl/bcs/v3/buildable'
 require 'dhl/bcs/v3/shipment'
