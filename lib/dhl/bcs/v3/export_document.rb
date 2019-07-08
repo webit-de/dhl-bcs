@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class ExportDocument
     include Buildable
 

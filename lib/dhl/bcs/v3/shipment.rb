@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Shipment
 
     attr_accessor :shipper, :receiver, :bank_data, :shipment_date,

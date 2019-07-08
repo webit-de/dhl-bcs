@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Postfiliale < Location
 
     ADD_PROPS = %i(postfilial_number post_number).freeze

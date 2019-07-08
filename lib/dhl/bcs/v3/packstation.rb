@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Packstation < Location
 
     ADD_PROPS = %i(post_number packstation_number).freeze

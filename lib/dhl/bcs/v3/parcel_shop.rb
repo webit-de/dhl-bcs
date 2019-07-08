@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class ParcelShop < Location
 
     ADD_PROPS = %i(parcel_shop_number street_name street_number).freeze

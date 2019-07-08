@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   class Receiver
 
     # a location is one of Address, Packstation, Postfiliale or ParcelShop

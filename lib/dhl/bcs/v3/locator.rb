@@ -1,4 +1,4 @@
-module Dhl::Bcs::V2
+module Dhl::Bcs::V3
   # finds proper class from attributes and builds object
   class Locator
 
