@@ -19,24 +19,24 @@ require 'dhl/bcs/v2/export_document'
 module Dhl
   module Bcs
 
-    def self.client(config, options = {})
-      V2::Client.new(config, options)
+    def self.client(config, **options)
+      V2::Client.new(config, **options)
     end
 
-    def self.build_shipment(*args)
-      V2::Shipment.build(*args)
+    def self.build_shipment(**opts)
+      V2::Shipment.build(**opts)
     end
 
-    def self.build_shipper(*args)
-      V2::Shipper.build(*args)
+    def self.build_shipper(**opts)
+      V2::Shipper.build(**opts)
     end
 
-    def self.build_receiver(*args)
-      V2::Receiver.build(*args)
+    def self.build_receiver(**opts)
+      V2::Receiver.build(**opts)
     end
 
-    def self.build_service(*args)
-      V2::Service.new(*args)
+    def self.build_service(**opts)
+      V2::Service.new(**opts)
     end
 
   end

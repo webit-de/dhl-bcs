@@ -50,7 +50,7 @@ module Dhl::Bcs::V2
     end
 
     def validate_shipment(*shipments, **options)
-      request(:validate_shipment, build_shipment_orders(shipments, options)) do |response|
+      request(:validate_shipment, build_shipment_orders(shipments, **options)) do |response|
         [response.body[:validate_shipment_response][:validation_state]].flatten.map do |validation_state|
           validation_state[:status]
         end
@@ -58,7 +58,7 @@ module Dhl::Bcs::V2
     end
 
     def create_shipment_order(*shipments, **options)
-      request(:create_shipment_order, build_shipment_orders(shipments, options)) do |response|
+      request(:create_shipment_order, build_shipment_orders(shipments, **options)) do |response|
         [response.body[:create_shipment_order_response][:creation_state]].flatten.map do |creation_state|
           creation_state[:label_data]
         end
@@ -66,7 +66,7 @@ module Dhl::Bcs::V2
     end
 
     def update_shipment_order(shipment_number, shipment, **options)
-      request(:update_shipment_order, { 'cis:shipmentNumber' => shipment_number }.merge(build_shipment_orders([shipment], options))) do |response|
+      request(:update_shipment_order, { 'cis:shipmentNumber' => shipment_number }.merge(build_shipment_orders([shipment], **options))) do |response|
         clean_response_data(response.body[:update_shipment_order_response][:label_data])
       end
     end

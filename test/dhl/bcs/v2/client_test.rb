@@ -6,7 +6,7 @@ module Dhl::Bcs::V2
     def setup
       config = { user: '2222222222_01', signature: 'pass', ekp: '2222222222', participation_number: '01', api_user: 'test', api_pwd: 'test' }
       options = { test: true, log: false }
-      @client = Dhl::Bcs.client(config, options)
+      @client = Dhl::Bcs.client(config, **options)
     end
 
     def test_get_version_request

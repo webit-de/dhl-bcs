@@ -23,17 +23,15 @@ module Dhl::Bcs::V2
             customs_value: '99.90'
           }
         ],
-        {
-          invoice_number: '12345678',
-          export_type: 'OTHER',
-          export_type_description: 'Permanent',
-          terms_of_trade: 'DDP',
-          place_of_commital: 'Bonn',
-          additional_fee: '1',
-          permit_number: '1234',
-          attestation_number: '12345678',
-          with_electronic_export_notification: true
-        }
+        invoice_number: '12345678',
+        export_type: 'OTHER',
+        export_type_description: 'Permanent',
+        terms_of_trade: 'DDP',
+        place_of_commital: 'Bonn',
+        additional_fee: '1',
+        permit_number: '1234',
+        attestation_number: '12345678',
+        with_electronic_export_notification: true
       )
 
       assert_equal '12345678', export_document.invoice_number
@@ -66,7 +64,6 @@ module Dhl::Bcs::V2
 
       assert_equal Hash, export_document.to_soap_hash.class
     end
-
 
   end
 end

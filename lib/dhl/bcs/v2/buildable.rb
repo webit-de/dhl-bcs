@@ -6,7 +6,7 @@ module Dhl::Bcs::V2
     end
 
     module ClassMethods
-      def build(attributes)
+      def build(**attributes)
         attrib = attributes[underscore(name.split('::').last).to_sym]
         if attrib.is_a?(self)
           attrib
@@ -16,9 +16,9 @@ module Dhl::Bcs::V2
             value = attributes.delete(prop)
             klass_attributes[prop] = value if value
           end
-          new(klass_attributes)
+          new(**klass_attributes)
         elsif attrib.is_a?(Hash)
-          new(attrib)
+          new(**attrib)
         end
       end
 

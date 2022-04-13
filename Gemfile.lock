@@ -1,0 +1,73 @@
+PATH
+  remote: .
+  specs:
+    dhl-bcs (0.3.0)
+      savon (~> 2.12)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
+    akami (1.3.1)
+      gyoku (>= 0.4.0)
+      nokogiri
+    builder (3.2.4)
+    byebug (11.1.3)
+    coderay (1.1.3)
+    crack (0.4.5)
+      rexml
+    gyoku (1.4.0)
+      builder (>= 2.1.2)
+      rexml (~> 3.0)
+    hashdiff (1.0.1)
+    httpi (2.5.0)
+      rack
+      socksify
+    method_source (1.0.0)
+    minitest (5.15.0)
+    nokogiri (1.13.4-x86_64-linux)
+      racc (~> 1.4)
+    nori (2.6.0)
+    pry (0.13.1)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
+    pry-byebug (3.9.0)
+      byebug (~> 11.0)
+      pry (~> 0.13.0)
+    public_suffix (4.0.7)
+    racc (1.6.0)
+    rack (2.2.3)
+    rake (13.0.6)
+    rexml (3.2.5)
+    savon (2.12.1)
+      akami (~> 1.2)
+      builder (>= 2.1.2)
+      gyoku (~> 1.2)
+      httpi (~> 2.3)
+      nokogiri (>= 1.8.1)
+      nori (~> 2.4)
+      wasabi (~> 3.4)
+    socksify (1.7.1)
+    wasabi (3.7.0)
+      addressable
+      httpi (~> 2.0)
+      nokogiri (>= 1.4.2)
+    webmock (3.14.0)
+      addressable (>= 2.8.0)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
+
+PLATFORMS
+  x86_64-linux
+
+DEPENDENCIES
+  bundler (~> 2.3)
+  dhl-bcs!
+  minitest (~> 5.15)
+  pry-byebug (~> 3.9)
+  rake (~> 13.0)
+  webmock (~> 3.14)
+
+BUNDLED WITH
+   2.3.4

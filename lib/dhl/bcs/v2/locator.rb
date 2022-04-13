@@ -2,12 +2,12 @@ module Dhl::Bcs::V2
   # finds proper class from attributes and builds object
   class Locator
 
-    def self.for(attributes = {})
-      location_class = location_class_finder(attributes)
+    def self.for(**attributes)
+      location_class = location_class_finder(**attributes)
       location_builder(attributes, location_class: location_class)
     end
 
-    def self.location_class_finder(attributes)
+    def self.location_class_finder(**attributes)
       if attributes.key?(:packstation_number)
         Packstation
       elsif attributes.key?(:postfilial_number)
@@ -20,7 +20,7 @@ module Dhl::Bcs::V2
     end
 
     def self.location_builder(attributes = {}, location_class: Address)
-      location_class.build(attributes)
+      location_class.build(**attributes)
     end
 
   end

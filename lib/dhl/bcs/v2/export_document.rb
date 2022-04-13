@@ -2,8 +2,11 @@ module Dhl::Bcs::V2
   class ExportDocument
     include Buildable
 
-    PROPERTIES = %i(invoice_number export_type export_type_description terms_of_trade place_of_commital additional_fee permit_number attestation_number with_electronic_export_notification export_doc_positions).freeze
-    attr_accessor(*PROPERTIES)
+    ACCESSOR_PROPERTIES = %i[invoice_number export_type_description place_of_commital additional_fee permit_number attestation_number with_electronic_export_notification export_doc_positions].freeze
+    READER_PROPERTIES = %i[export_type terms_of_trade]
+    PROPERTIES = (ACCESSOR_PROPERTIES + READER_PROPERTIES).freeze
+    attr_accessor(*ACCESSOR_PROPERTIES)
+    attr_reader(*READER_PROPERTIES)
 
     EXPORT_TYPES = %w(OTHER PRESENT COMMERCIAL_SAMPLE DOCUMENT RETURN_OF_GOODS).freeze
     TERMS_OF_TRADES = %w(DDP DXV DDU DDX).freeze
@@ -11,9 +14,9 @@ module Dhl::Bcs::V2
     def self.build(export_doc_positions = [], **attributes)
       array_of_export_doc_positions = []
       export_doc_positions.each do |export_doc_position|
-        array_of_export_doc_positions << ExportDocPosition.build(export_doc_position) if export_doc_position.is_a?(Hash)
+        array_of_export_doc_positions << ExportDocPosition.build(**export_doc_position) if export_doc_position.is_a?(Hash)
       end
-      new({ export_doc_positions: array_of_export_doc_positions }.merge(attributes))
+      new(**{ export_doc_positions: array_of_export_doc_positions }.merge(attributes))
     end
 
     def initialize(**attributes)

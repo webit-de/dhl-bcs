@@ -23,14 +23,14 @@ module Dhl::Bcs::V2
 
     # build a shipment from hash data
     def self.build(shipper:, receiver:, bank_data: nil, export_document: nil, **shipment_attributes)
-      shipper = Shipper.build(shipper) if shipper.is_a?(Hash)
-      receiver = Receiver.build(receiver) if receiver.is_a?(Hash)
-      bank_data = BankData.build(bank_data) if bank_data.is_a?(Hash)
-      export_document = ExportDocument.build(export_document.delete(:export_doc_positions),export_document) if export_document.is_a?(Hash)
-      new({ shipper: shipper, receiver: receiver, bank_data: bank_data, export_document: export_document }.merge(shipment_attributes))
+      shipper = Shipper.build(**shipper) if shipper.is_a?(Hash)
+      receiver = Receiver.build(**receiver) if receiver.is_a?(Hash)
+      bank_data = BankData.build(**bank_data) if bank_data.is_a?(Hash)
+      export_document = ExportDocument.build(export_document.delete(:export_doc_positions), **export_document) if export_document.is_a?(Hash)
+      new(**{ shipper: shipper, receiver: receiver, bank_data: bank_data, export_document: export_document }.merge(shipment_attributes))
     end
 
-    def initialize(attributes = {})
+    def initialize(**attributes)
       assign_attributes(
         {
           product: 'V01PAK',

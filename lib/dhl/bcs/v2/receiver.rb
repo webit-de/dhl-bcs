@@ -7,9 +7,9 @@ module Dhl::Bcs::V2
     attr_accessor(*PROPERTIES)
 
     def self.build(name: nil, **attributes)
-      communication = Communication.build(attributes)
-      location = Locator.for(attributes)
-      new(attributes.merge(name: name, communication: communication, location: location))
+      communication = Communication.build(**attributes)
+      location = Locator.for(**attributes)
+      new(**attributes.merge(name: name, communication: communication, location: location))
     end
 
     def initialize(**attributes)

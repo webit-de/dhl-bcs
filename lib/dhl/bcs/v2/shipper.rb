@@ -6,9 +6,9 @@ module Dhl::Bcs::V2
     attr_accessor(*PROPERTIES)
 
     def self.build(company: nil, **attributes)
-      address = Address.build(attributes)
-      communication = Communication.build(attributes)
-      new(attributes.merge(address: address, communication: communication, company: company))
+      address = Address.build(**attributes)
+      communication = Communication.build(**attributes)
+      new(**attributes.merge(address: address, communication: communication, company: company))
     end
 
     def initialize(**attributes)
